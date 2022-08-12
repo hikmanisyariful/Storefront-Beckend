@@ -9,9 +9,7 @@
   "ignorePatterns": ["**/migrations/*.js"],
   "rules": {
     "@typescript-eslint/no-unused-vars": "error",
-    "@typescript-eslint/no-var-requires": "error",
-    "no-empty": "warn",
-    "no-cond-assign": ["error", "always"]
+    "@typescript-eslint/ban-ts-ignore": "off"
   },
   "env": {
     "browser": true,

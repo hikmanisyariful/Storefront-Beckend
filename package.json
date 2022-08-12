@@ -12,7 +12,7 @@
     "lint": "eslint --ext .js,.ts ."
   },
   "keywords": [],
-  "author": "Hikmani Syariful",
+  "author": "Hikmani Syariful Fajar",
   "license": "ISC",
   "dependencies": {
     "body-parser": "^1.20.0",
