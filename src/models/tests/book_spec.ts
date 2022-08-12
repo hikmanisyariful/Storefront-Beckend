@@ -16,14 +16,28 @@ describe("Book Model", () => {
       title: "Bridge to Terabithia",
       total_pages: 250,
       author: "Katherine Paterson",
-      summary: "Childrens"
+      summary: "Childrens",
+      type: "Science"
     });
     expect(result).toEqual({
-      id: 1,
+      id: 17,
       title: "Bridge to Terabithia",
       total_pages: 250,
       author: "Katherine Paterson",
-      summary: "Childrens"
+      summary: "Childrens",
+      type: "Science"
+    });
+  });
+
+  it('show method should return the correct book', async () => {
+    const result = await store.show("17");
+    expect(result).toEqual({
+      id: 17,
+      title: 'Bridge to Terabithia',
+      total_pages: 250,
+      author: 'Katherine Paterson',
+      summary: 'Childrens',
+      type: 'Science'
     });
   });
 });

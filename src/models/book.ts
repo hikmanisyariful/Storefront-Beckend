@@ -6,6 +6,7 @@ export type Book = {
   author: string;
   total_pages: number;
   summary: string;
+  type: string;
 };
 
 export class BookStore {
@@ -27,20 +28,18 @@ export class BookStore {
       const sql = "SELECT * FROM books WHERE id=($1)";
       const result = await conn.query(sql, [id]);
       conn.release();
-      console.log('>>>>>>>', result.rows[0])
       return result.rows[0];
     } catch (err) {
       throw new Error(`Could not find book ${id}. Error: ${err}`);
     }
   }
 
-  async create(b: {title: string, author: string, total_pages: number, summary: string}): Promise<Book> {
+  async create(b: {title: string, author: string, total_pages: number, summary: string, type: string}): Promise<Book> {
     try {
       const conn = await Client.connect();
-      const sql = "INSERT INTO books (title, author, total_pages, summary) VALUES ($1, $2, $3, $4)";
-      const result = await conn.query(sql, [b.title, b.author, b.total_pages, b.summary]);
+      const sql = "INSERT INTO books (title, author, total_pages, summary, type) VALUES ($1, $2, $3, $4, $5) RETURNING *";
+      const result = await conn.query(sql, [b.title, b.author, b.total_pages, b.summary, b.type]);
       conn.release();
-      console.log('>>>>>>>>', result.rows)
       return result.rows[0];
     } catch (err) {
       throw new Error(`Could not add new book ${b.title}. Error: ${err}`);
