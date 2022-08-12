@@ -1,8 +1,7 @@
-// @ts-ignore:
 import Client from "../database";
 
 export type Book = {
-  id: number;
+  id: number
   title: string;
   author: string;
   totalPages: number;
@@ -34,12 +33,13 @@ export class BookStore {
     }
   }
 
-  async create(b: Book): Promise<Book> {
+  async create(b: {title: string, author: string, totalPages: number, summary: string}): Promise<Book> {
     try {
       const conn = await Client.connect();
       const sql = "INSER INTO books (title, author, totalPages, summary) VALUES ($1, $2, $3, $4)";
       const result = await conn.query(sql, [b.title, b.author, b.totalPages, b.summary]);
       conn.release();
+      console.log(result.rows[0])
       return result.rows[0];
     } catch (err) {
       throw new Error(`Could not add new book ${b.title}. Error: ${err}`);
